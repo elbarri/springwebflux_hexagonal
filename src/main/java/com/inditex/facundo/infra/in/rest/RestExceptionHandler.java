@@ -15,4 +15,10 @@ public class RestExceptionHandler {
     log.debug("handling exception::" + ex);
     return ResponseEntity.badRequest().body(ex.getMessage());
   }
+
+  @ExceptionHandler(RuntimeException.class)
+  ResponseEntity<Object> unexpectedException(RuntimeException ex){
+    log.error("handling exception::" + ex);
+    return ResponseEntity.internalServerError().body("Server Error: Something went wrong");
+  }
 }
